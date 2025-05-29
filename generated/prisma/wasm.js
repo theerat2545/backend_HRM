@@ -122,9 +122,25 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  username: 'username',
+  employeeCode: 'employeeCode',
   password: 'password',
-  role: 'role'
+  role: 'role',
+  efirstName: 'efirstName',
+  elastName: 'elastName',
+  mail: 'mail',
+  position: 'position',
+  department: 'department',
+  startWork: 'startWork',
+  workAge: 'workAge',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.AttendanceScalarFieldEnum = {
+  id: 'id',
+  checkIn: 'checkIn',
+  checkOut: 'checkOut',
+  userId: 'userId'
 };
 
 exports.Prisma.LeaveRequestScalarFieldEnum = {
@@ -136,14 +152,7 @@ exports.Prisma.LeaveRequestScalarFieldEnum = {
   status: 'status',
   attachment: 'attachment',
   createdAt: 'createdAt',
-  employeeId: 'employeeId'
-};
-
-exports.Prisma.AttendanceScalarFieldEnum = {
-  id: 'id',
-  checkIn: 'checkIn',
-  checkOut: 'checkOut',
-  employeeId: 'employeeId'
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {
@@ -164,8 +173,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  LeaveRequest: 'LeaveRequest',
-  Attendance: 'Attendance'
+  Attendance: 'Attendance',
+  LeaveRequest: 'LeaveRequest'
 };
 
 /**
