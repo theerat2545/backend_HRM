@@ -1,4 +1,3 @@
-// src/config/cors.ts
 import cors, { CorsOptions } from 'cors';
 
 // กำหนด origin ที่อนุญาต

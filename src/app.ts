@@ -5,7 +5,7 @@ import morgan from 'morgan';
 // import { env } from './config/env';
 import { errorHandler } from './middleware/error.middleware';
 import { loggerMiddleware } from './middleware/logger.middleware';
-import routes from './routes'; // รวมทุก route ไว้ใน index.ts
+import routes from './routes'; 
 
 const app: Application = express();
 

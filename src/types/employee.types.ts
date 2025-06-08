@@ -11,5 +11,5 @@ export interface CreateEmployeeDto {
   workAge: number;
   status?: string;
   createdAt?: string;
+  updatedAt?: string;
 }
-

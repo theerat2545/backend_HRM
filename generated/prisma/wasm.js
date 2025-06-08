@@ -133,7 +133,8 @@ exports.Prisma.UserScalarFieldEnum = {
   startWork: 'startWork',
   workAge: 'workAge',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.AttendanceScalarFieldEnum = {
@@ -155,6 +156,26 @@ exports.Prisma.LeaveRequestScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.DepartmentScalarFieldEnum = {
+  id: 'id',
+  thainame: 'thainame',
+  engname: 'engname',
+  shortname: 'shortname',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PositionScalarFieldEnum = {
+  id: 'id',
+  thainame: 'thainame',
+  engname: 'engname',
+  shortname: 'shortname',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  departmentId: 'departmentId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -174,7 +195,9 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Attendance: 'Attendance',
-  LeaveRequest: 'LeaveRequest'
+  LeaveRequest: 'LeaveRequest',
+  Department: 'Department',
+  Position: 'Position'
 };
 
 /**

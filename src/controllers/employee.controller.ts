@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { createEmployee, getAllEmployee } from '../services/employee.service';
+import { createEmployee, getAllEmployee, getEmployeeById } from '../services/employee.service';
 
 export const createEmployeeHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -14,6 +14,19 @@ export const getAllEmployeeHandler = async (req: Request, res: Response, next: N
   try {
     const employees = await getAllEmployee();
     res.status(200).json({ data: employees });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getEmployeeByIdHandler = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const employee = await getEmployeeById(id);
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+    res.status(200).json({ data: employee });
   } catch (error) {
     next(error);
   }

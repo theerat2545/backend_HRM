@@ -24,8 +24,37 @@ export const createEmployee = async (data: CreateEmployeeDto) => {
 
 export const getAllEmployee = async () => {
     const employees = await prisma.user.findMany({
-        orderBy: { createdAt: 'desc' }, // เรียงลำดับตามวันที่สร้างล่าสุดก่อน
+        orderBy: { createdAt: 'desc' }, 
+        take: 10, 
+        select: {
+            employeeCode: true,
+            efirstName: true,
+            elastName: true,
+            mail: true,
+            department: true,
+            position: true,
+            startWork: true,
+            workAge: true,
+            status: true,
+        }
     });
-
     return employees;
+};
+
+export const getEmployeeById = async (id: string) => {
+    const employee = await prisma.user.findUnique({
+        where: { id: Number(id) },
+        select: {
+            employeeCode: true,
+            efirstName: true,
+            elastName: true,
+            mail: true,
+            department: true,
+            position: true,
+            startWork: true,
+            workAge: true,
+            status: true,
+        }
+    });
+    return employee;
 };
