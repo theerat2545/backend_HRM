@@ -1,31 +1,7 @@
  import { prisma } from "../utils/prisma";
-import { CreateUserDto, LoginUserDto } from "../types/auth.types";
+import { LoginUserDto } from "../types/auth.types";
 import { hashPassword, comparePassword } from "../utils/password.utils";
 import { generateAccessToken, generateRefreshToken } from "../utils/token.utils";
-
-export const registerUser = async (a: CreateUserDto) => {
-    // const hashedPassword = await hashPassword(data.password);
-    const hashed = await hashPassword('pass12'); // Use a default password for demonstration purposes
-    const newUser = await prisma.user.create({
-      data: {
-        employeeCode: a.employeeCode,
-        password: hashed,
-        mail: a.email,
-        role: a.role,
-        efirstName: a.efirstName, // Add this field
-        elastName: a.elastName,   // Add this field
-        startWork: new Date(a.startWork),   // Add this field (should be a Date or ISO string)
-        // Optional fields:
-        // position: a.position,
-        // department: a.department,
-        // workAge: a.workAge,
-        // status: a.status,
-        // createdAt: new Date(),
-        // updatedAt: new Date(),
-},
-    });
-    return newUser;
-};
 
 export const loginUser = async (data: LoginUserDto) => {
    const user = await prisma.user.findFirst({
@@ -47,19 +23,16 @@ export const loginUser = async (data: LoginUserDto) => {
     return { accessToken, refreshToken };
 };
 
-export const logoutUser = async (refreshToken: string) => {
-    // Implement logic to invalidate the refresh token, e.g., remove it from the database or cache
-    // This is a placeholder as the actual implementation depends on your token storage strategy
-    return { message: "Logout successful" };
+export const logoutUser = async (_refreshToken: string) => {
+    // Implement logic to invalidate the refresh token if you store them
+    // For demonstration, just return a message
+    return { message: "Logged out successfully" };
 };
 
 export const refreshTokenUser = async (refreshToken: string) => {
-    // Implement logic to verify and refresh the token
-    // This is a placeholder as the actual implementation depends on your token storage strategy
-    // Replace 'employeeCode' with the correct unique identifier if needed
-    // For demonstration, using employeeCode as an example
+    
     const user = await prisma.user.findFirst({
-        where: { employeeCode: refreshToken }, // Replace with actual logic to map refreshToken to a user
+        where: { employeeCode: refreshToken }, 
     });
 
     if (!user) {

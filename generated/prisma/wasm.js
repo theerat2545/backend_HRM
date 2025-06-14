@@ -128,13 +128,32 @@ exports.Prisma.UserScalarFieldEnum = {
   efirstName: 'efirstName',
   elastName: 'elastName',
   mail: 'mail',
-  position: 'position',
-  department: 'department',
+  citizenId: 'citizenId',
+  birthDate: 'birthDate',
+  age: 'age',
+  gender: 'gender',
+  phone: 'phone',
+  emergencyContact: 'emergencyContact',
+  address: 'address',
+  photo: 'photo',
   startWork: 'startWork',
+  endWork: 'endWork',
   workAge: 'workAge',
-  status: 'status',
+  workType: 'workType',
+  workStatus: 'workStatus',
+  level: 'level',
+  departmentId: 'departmentId',
+  salary: 'salary',
+  bankName: 'bankName',
+  bankAccount: 'bankAccount',
+  contractFile: 'contractFile',
+  personalFile: 'personalFile',
+  resumeFile: 'resumeFile',
+  idCardFile: 'idCardFile',
+  houseRegFile: 'houseRegFile',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  positionId: 'positionId'
 };
 
 exports.Prisma.AttendanceScalarFieldEnum = {
@@ -190,7 +209,23 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.Gender = exports.$Enums.Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER'
+};
 
+exports.WorkType = exports.$Enums.WorkType = {
+  FULLTIME: 'FULLTIME',
+  CONTRACT: 'CONTRACT',
+  FREELANCE: 'FREELANCE'
+};
+
+exports.WorkStatus = exports.$Enums.WorkStatus = {
+  ACTIVE: 'ACTIVE',
+  RESIGNED: 'RESIGNED',
+  SUSPENDED: 'SUSPENDED'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',

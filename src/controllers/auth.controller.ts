@@ -1,14 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { registerUser, loginUser } from '../services/auth.service';
-
-export const register = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const user = await registerUser(req.body);
-    res.status(201).json({ message: 'User registered successfully', data: user });
-  } catch (error) {
-    next(error);
-  }
-};
+import { loginUser, } from '../services/auth.service';
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -19,14 +10,15 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   }
 };
 
-export const logout = async (_req: Request, res: Response, next: NextFunction) => {
-  try {
-    // Implement logout logic here, e.g., invalidate refresh token
-    res.status(200).json({ message: 'Logout successful' });
-  } catch (error) {
-    next(error);
-  }
-};
+// export const logout = async (req: Request, res: Response, next: NextFunction) => {
+//     try {
+//         const { refreshToken } = req.body;
+//         const result = await logoutUser(refreshToken);
+//         res.status(200).json(result);
+//     } catch (error) {
+//         next(error);
+//     }
+// };
 
 export const refreshToken = async (req: Request, res: Response, next: NextFunction) => {
   try {

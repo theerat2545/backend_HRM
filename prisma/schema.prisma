@@ -15,30 +15,84 @@ datasource db {
 }
 
 model User {
-id           Int      @id @default(autoincrement())
-  employeeCode String   @unique  // Add this line
-  password     String
-  role         String
-  efirstName   String?
-  elastName    String?
-  mail         String   @unique
-  position     String?
-  department   String?
-  startWork    DateTime?
-  workAge      Int?
-  status       String   @default("Active")
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id             Int       @id @default(autoincrement())
+  employeeCode   String    @unique
+  password       String
+  role           String
 
-  leaveRequests LeaveRequest[]
-  attendanceRecords Attendance[]
+  // ข้อมูลส่วนตัว
+  efirstName     String
+  elastName      String
+  mail           String?   @unique
+  citizenId      String?   // เลขบัตรประชาชน
+  birthDate      DateTime?
+  age            Int?
+  gender         Gender?
+  phone          String?
+  emergencyContact String?
+
+  // ที่อยู่และรูปถ่าย
+  address        String?
+  photo          String?   // URL หรือ path
+
+  // การทำงาน
+  startWork      DateTime
+  endWork        DateTime?
+  workAge        Int?
+  workType       WorkType?
+  workStatus     WorkStatus?
+  level          String?   // เช่น Junior, Senior
+  // position       String?   // หรือลิงก์กับ Position Model
+  departmentId   Int?
+  department   Department? @relation(fields: [departmentId], references: [id])
+  salary         Float?
+
+  // บัญชีเงินเดือน
+  bankName       String?
+  bankAccount    String?
+
+  // เอกสาร
+  contractFile   String?
+  personalFile   String?
+  resumeFile     String?
+  idCardFile     String?
+  houseRegFile   String?
+
+  // เวลาสร้าง/อัปเดต
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // ความสัมพันธ์
+  leaveRequests      LeaveRequest[]
+  attendanceRecords  Attendance[]
+
+  positionId   Int?
+  position     Position?   @relation(fields: [positionId], references: [id])
 }
-
 
 enum Role {
   HR
   EMPLOYEE
 }
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum WorkType {
+  FULLTIME
+  CONTRACT
+  FREELANCE
+}
+
+enum WorkStatus {
+  ACTIVE
+  RESIGNED
+  SUSPENDED
+}
+
 
 
 model Attendance {
@@ -71,6 +125,7 @@ model Department {
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 
+  users    User[]
   position    Position[] // ความสัมพันธ์แบบ one-to-many
 }
 
@@ -82,8 +137,9 @@ model Position {
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
 
-  departmentId Int?        
-  department   Department? @relation(fields: [departmentId], references: [id]) // ความสัมพันธ์แบบ many-to-one
+  users    User[]
+  departmentId Int   
+  department   Department @relation(fields: [departmentId], references: [id]) // ความสัมพันธ์แบบ many-to-one
 }
 
 

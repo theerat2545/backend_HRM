@@ -1,5 +1,5 @@
 import { prisma } from '../utils/prisma';
-import { CreateDepartmentDto } from '../types/department.types';
+import { CreateDepartmentDto, UpdateDepartmentDto } from '../types/department.types';
 export const createDepartment = async (data: CreateDepartmentDto) => {
     const newDepartment = await prisma.department.create({
         data: {
@@ -42,14 +42,44 @@ export const getDepartmentById = async (id: string) => {
     });
     return department;
 };
-// export const updateDepartment = async (id: string, data: Partial<CreateDepartmentDto>) => {
-//     const updatedDepartment = await prisma.department.update({
-//         where: { id: Number(id) },
-//         data: {
-//             name: data.name,
-//             description: data.description,
-//             updatedAt: new Date(),
-//         },
-//     });
-//     return updatedDepartment;
-// };
+export const updateDepartment = async (id: string, data: UpdateDepartmentDto) => {
+    const updatedDepartment = await prisma.department.update({
+        where: { id: Number(id) },
+        data: {
+            thainame: data.thainame,
+            engname: data.engname,
+            shortname: data.shortname,
+            description: data.description,
+            updatedAt: new Date(),
+        },
+    });
+    return updatedDepartment;
+};
+export const deleteDepartment = async (id: string) => {
+    const deletedDepartment = await prisma.department.delete({
+        where: { id: Number(id) },
+    });
+    return deletedDepartment;
+};
+export const searchDepartments = async (searchText: string) => {
+    const departments = await prisma.department.findMany({
+        where: {
+            OR: [
+                { thainame: { contains: searchText, mode: 'insensitive' } },
+                { engname: { contains: searchText, mode: 'insensitive' } },
+                { shortname: { contains: searchText, mode: 'insensitive' } },
+                { description: { contains: searchText, mode: 'insensitive' } },
+            ],
+        },
+        orderBy: { createdAt: 'desc' },
+        select: {
+            id: true,
+            thainame: true,
+            engname: true,
+            shortname: true,
+            description: true,
+            createdAt: true,
+        }
+    });
+    return departments;
+};
